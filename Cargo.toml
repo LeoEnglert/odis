@@ -1,13 +1,43 @@
 [package]
 name = "odis"
-version = "0.0.1"
-authors = ["Armin Strupp"]
+version = "2026.3.0"
+authors = ["Dominik Dürrschnabel", "Armin Strupp"]
 edition = "2021"
 license = "AGPL-3.0-only"
+description = "Formal Concept Analysis algorithms and data structures"
+repository = "https://github.com/odis-rs/odis"
+homepage = "https://odis.github.io"
+documentation = "https://docs.rs/odis"
+keywords = ["fca", "lattice", "formal-concept", "algorithms"]
+categories = ["algorithms", "data-structures", "science"]
+readme = "README.md"
 
 [dependencies]
 bit-set = "0.8.0"
+rand = "0.8.5"
 rust-sugiyama = "0.3.0"
+splr = {version = "0.17.2", features = ["platform_wasm"]}
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+getrandom = {version = "0.2.16", features = ["js"]}
+web-sys = { version = "0.3", features = ["Window", "Performance"] }
 
 [dev-dependencies]
 itertools = "0.13.0"
+criterion = { version = "0.5", features = ["html_reports"] }
+
+[[bench]]
+name = "concept_enumeration"
+harness = false
+
+[[bench]]
+name = "implication_basis"
+harness = false
+
+[[bench]]
+name = "drawing_algorithms"
+harness = false
+
+[[bench]]
+name = "iceberg"
+harness = false
