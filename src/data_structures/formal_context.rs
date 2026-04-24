@@ -400,6 +400,20 @@ impl<T> FormalContext<T> {
         }
     }
 
+    /// Sets or clears the incidence cross at object index `g` and attribute index `m`,
+    /// keeping the precomputed derivation caches in sync.
+    pub fn set_cross(&mut self, g: usize, m: usize, value: bool) {
+        if value {
+            self.incidence.insert((g, m));
+            self.atomic_object_derivations[g].insert(m);
+            self.atomic_attribute_derivations[m].insert(g);
+        } else {
+            self.incidence.remove(&(g, m));
+            self.atomic_object_derivations[g].remove(m);
+            self.atomic_attribute_derivations[m].remove(g);
+        }
+    }
+
     /// Removes the object at the specified index from the existing FormalContext.
     ///
     /// All incidence entries involving the removed object are deleted.
