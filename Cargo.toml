@@ -41,3 +41,7 @@ harness = false
 [[bench]]
 name = "iceberg"
 harness = false
+
+[[bench]]
+name = "dimension"
+harness = false
